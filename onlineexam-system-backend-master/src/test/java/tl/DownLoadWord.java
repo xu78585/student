@@ -1,18 +1,11 @@
-package com.mwt.oes;
+package tl;
 
 import com.deepoove.poi.XWPFTemplate;
 import com.deepoove.poi.data.NumbericRenderData;
 import com.deepoove.poi.data.TextRenderData;
-import com.mwt.oes.service.StudentProfileService;
 import com.mwt.oes.service.TeacherBankManageService;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import tl.el.ExamModel;
 
 import java.io.FileOutputStream;
@@ -22,30 +15,15 @@ import java.util.Map;
 
 import static com.deepoove.poi.data.NumbericRenderData.FMT_UPPER_LETTER;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = OesApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-//@WebAppConfiguration
-public class OesApplicationTests {
-
-    StudentProfileService studentProfileService;
+public class DownLoadWord {
 
     @Autowired
     private TeacherBankManageService teacherBankManageService;
 
-    @Before
-    public void init() {
-        System.out.println("开始测试-----------------");
-    }
+    @Test //获取所有
+    public void testRenderMap() throws Exception {
 
-    @After
-    public void after() {
-        System.out.println("测试结束-----------------");
-    }
-
-    @Test
-    public void contextLoads() throws Exception {
-
-//单选
+        //单选
         List<Map<String, Object>> singleList = teacherBankManageService.getSingleList();
         //多选
         List<Map<String, Object>> multipleList = teacherBankManageService.getMultipleList();
@@ -59,10 +37,6 @@ public class OesApplicationTests {
 
         examModel.setFeature1(new NumbericRenderData(FMT_UPPER_LETTER, new ArrayList<TextRenderData>() {
             {
-				singleList.forEach(map->{
-					add(new TextRenderData( ));
-				});
-
                 add(new TextRenderData("Plug-in grammar, add new grammar by yourself"));
                 add(new TextRenderData(
                         "Supports word text, local pictures, web pictures, table, list, header, footer..."));
@@ -84,6 +58,10 @@ public class OesApplicationTests {
         out.flush();
         out.close();
 
+
     }
+
+    //根据试卷获取某个
+
 
 }
